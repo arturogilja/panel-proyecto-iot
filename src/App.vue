@@ -33,7 +33,7 @@ export default {
     this.socket.on('toggle', (item) => {
       console.log(item)
       navigator.serviceWorker.ready.then((registration) => {
-        registration.showNotification('Un objeto ha entrado a tu mochila', {
+        registration.showNotification(`Un objeto ha ${item.active ? 'entrado a' : 'salido de'} tu mochila`, {
           body: `'${item.nombre}' ha ${item.active ? 'entrado a' : 'salido de'} tu mochila`,
         })
       })
