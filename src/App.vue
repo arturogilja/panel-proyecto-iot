@@ -32,15 +32,19 @@ export default {
     this.socket = io('https://arturogil.com.mx', { path: '/iot-api/socket.io' })
     this.socket.on('toggle', (item) => {
       console.log(item)
-      let notification = new Notification('Un objeto ha entrado a tu mochila', {
-        body: `'${item.nombre}' ha ${item.active ? 'entrado a' : 'salido de'} tu mochila`,
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.showNotification('Un objeto ha entrado a tu mochila', {
+          body: `'${item.nombre}' ha ${item.active ? 'entrado a' : 'salido de'} tu mochila`,
+        })
       })
       this.playAudio()
       this.getData()
     })
     this.socket.on('new', (item) => {
-      let notification = new Notification('Nuevo objeto', {
-        body: `Se ha creado el objeto ${item.nombre}`,
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.showNotification('Nuevo objeto', {
+          body: `Se ha creado el objeto ${item.nombre}`,
+        })
       })
       this.playAudio()
       this.getData()
